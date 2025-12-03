@@ -46,9 +46,9 @@ interface InputState {
 
 interface AuditResult {
   score: number;
-  warnings: { id: string, name: string, msg: string, missing: string[], severity: 'critical' | 'warning' }[];
-  successes: { id: string, name: string, category: string }[];
-  opportunities: { id: string, name: string, category: string }[];
+  warnings: { id: string, name: string, msg: string, missing: string[], severity: 'critical' | 'warning', req?: Requirements }[];
+  successes: { id: string, name: string, category: string, req?: Requirements }[];
+  opportunities: { id: string, name: string, category: string, req?: Requirements }[];
 }
 
 // Expanded Data Set for "Full Builder" feel
@@ -203,7 +203,7 @@ export default function BuilderPage() {
         {/* Inline Warning Text */}
         {activeWarning && (
           <div className="mt-1 text-[10px] text-amber-500 font-medium flex items-center gap-1">
-            <MoveUp size={10} /> Push to {activeWarning.req[statKey] || 'higher'} for {activeWarning.name}
+            <MoveUp size={10} /> Push to {activeWarning.req?.[statKey] || 'higher'} for {activeWarning.name}
           </div>
         )}
       </div>
